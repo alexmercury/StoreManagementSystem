@@ -25,52 +25,16 @@ namespace SimpleCSV
     private void OpenFile()
     {
       OpenFileDialog OpenFD = new OpenFileDialog();
-      OpenFD.InitialDirectory = String.Format("{0}\\Data", Directory.GetCurrentDirectory());
+      OpenFD.InitialDirectory = String.Format("{0}\\TestData", Directory.GetCurrentDirectory());
       OpenFD.Filter = "CSV files (.csv)|*.csv";
-
-      DataTable table = new DataTable();
 
       if (OpenFD.ShowDialog() == DialogResult.OK)
       {
-        string FileCSV = OpenFD.FileName;
-
-        using (StreamReader file = new StreamReader(FileCSV))
-        {
-          FileCSV = file.ReadToEnd();
-          bool ifFirst = true;
-          DataRow row = null;
-          int i = 0;
-
-          foreach (string str in FileCSV.Split('\n'))
-          {
-            if (!ifFirst)
-              row = table.NewRow();
-
-            foreach (string col in str.TrimEnd('\r').Split(';'))
-            {
-              if (ifFirst)
-                table.Columns.Add(col);
-              else
-              {
-                row[i++] = col;
-              }
-            }
-            i = 0;
-            if (!ifFirst)
-              table.Rows.Add(row);
-
-            ifFirst = false;
-          }
-        }
-
-        dataGridView1.DataSource = table;
-
+        toolStripStatusLabelPath.Text = OpenFD.FileName;
+        CSVReader reader = new CSVReader(OpenFD.FileName);
+        dataGridView1.DataSource = reader.GetDataTable();
       }
     }
 
-    private void CSVparser()
-    {
-
-    }
   }
 }
