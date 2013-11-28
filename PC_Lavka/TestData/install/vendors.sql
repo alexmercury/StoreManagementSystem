@@ -1,0 +1,5 @@
+﻿CREATE TABLE [vendors]
+(
+	[id] INT IDENTITY(1,1) PRIMARY KEY,
+	[name] VARCHAR(50) NOT NULL
+)

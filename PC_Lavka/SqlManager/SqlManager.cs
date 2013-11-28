@@ -24,6 +24,28 @@ namespace SqlManaging
       this.connectionString = connectionString;
     }
 
+    public void ExecCommand(string sqlQuery)
+    {
+      try
+      {
+        connection = new SqlConnection(connectionString);
+        connection.Open();
+        command = new SqlCommand();
+        command.CommandText = sqlQuery;
+        command.Connection = connection;
+        command.ExecuteNonQuery();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+      }
+      finally
+      {
+        connection.Close();
+        connection.Dispose();
+      }
+    }
+
     public bool TryToConnect()
     {
       bool result = false;
