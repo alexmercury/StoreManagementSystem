@@ -156,7 +156,7 @@ namespace Install
       tabe = reader.GetDataTable();
       foreach (DataRow row in tabe.Rows)
       {
-        rtbContent.Text += "Создание пользователя UID =" + row["uid"].ToString() + "...\n";
+        rtbContent.Text += "Создание пользователя UID = " + row["uid"].ToString() + " ...\n";
         User.Create(
             Convert.ToInt32(row["uid"].ToString()),
             row["password"].ToString(),

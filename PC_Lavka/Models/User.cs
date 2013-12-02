@@ -100,8 +100,8 @@ namespace Models
     /// </summary>
     public User(DataRow row)
     {
-      this.ID = Convert.ToInt32(row["id"].ToString());
-      this.UID = Convert.ToInt32(row["uid"].ToString());
+      this.ID = Convert.ToInt32(row["id"]);
+      this.UID = Convert.ToInt32(row["uid"]);
       this.Password = row["password"].ToString();
       this.Surname = row["surname"].ToString();
       this.Name = row["name"].ToString();
