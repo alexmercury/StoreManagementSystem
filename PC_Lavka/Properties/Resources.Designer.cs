@@ -73,6 +73,26 @@ namespace PC_Lavka.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap log_in {
+            get {
+                object obj = ResourceManager.GetObject("log_in", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap no_image {
+            get {
+                object obj = ResourceManager.GetObject("no_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap open_win7_hot {
             get {
                 object obj = ResourceManager.GetObject("open_win7_hot", resourceCulture);

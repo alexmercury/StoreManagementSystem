@@ -50,10 +50,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PC_Lavka.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,9 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employee\Admin.cs" />
-    <Compile Include="Employee\User.cs" />
-    <Compile Include="Employee\ShopAssistant.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +91,18 @@
       <DependentUpon>FormCSV.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlManager\SqlManager.cs" />
+    <Compile Include="UserLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserLoginForm.Designer.cs">
+      <DependentUpon>UserLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserBox.Designer.cs">
+      <DependentUpon>UserBox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormBase.resx">
       <DependentUpon>FormBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +121,12 @@
     </Compile>
     <EmbeddedResource Include="SimpleCSV\FormCSV.resx">
       <DependentUpon>FormCSV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserLoginForm.resx">
+      <DependentUpon>UserLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserBox.resx">
+      <DependentUpon>UserBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -146,138 +166,155 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TestData\categories\categories.csv">
+    <None Include="data\install\test\categories\categories.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\base_block\products.csv">
+    <None Include="data\install\test\products\base_block\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\cpu\products.csv">
+    <None Include="data\install\test\products\cpu\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\dvd_drive\products.csv">
+    <None Include="data\install\test\products\dvd_drive\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\hdd\products.csv">
+    <None Include="data\install\test\products\hdd\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\motherboard\products.csv">
+    <None Include="data\install\test\products\motherboard\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\video_cards\products.csv">
+    <None Include="data\install\test\products\video_cards\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\ram_memory\products.csv">
+    <None Include="data\install\test\products\ram_memory\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\sound_devices\products.csv">
+    <None Include="data\install\test\products\sound_devices\products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\vendors\vendors.csv">
+    <None Include="data\install\test\vendors\vendors.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\users\users.csv">
+    <None Include="data\install\test\users\users.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="TestData\products\base_block\img\1.jpg">
+    <None Include="data\install\test\users\img\admin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\base_block\img\2.jpg">
+    <None Include="data\install\test\products\base_block\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\base_block\img\3.jpg">
+    <None Include="data\install\test\products\base_block\img\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\cpu\img\1.jpg">
+    <None Include="data\install\test\products\base_block\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\cpu\img\2.jpg">
+    <None Include="data\install\test\products\cpu\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\cpu\img\3.jpg">
+    <None Include="data\install\test\products\cpu\img\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\cpu\img\4.jpg">
+    <None Include="data\install\test\products\cpu\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\cpu\img\5.jpg">
+    <None Include="data\install\test\products\cpu\img\4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\cpu\img\6.jpg">
+    <None Include="data\install\test\products\cpu\img\5.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\dvd_drive\img\1.jpg">
+    <None Include="data\install\test\products\cpu\img\6.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\dvd_drive\img\2.jpg">
+    <None Include="data\install\test\products\dvd_drive\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\dvd_drive\img\3.jpg">
+    <None Include="data\install\test\products\dvd_drive\img\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\hdd\img\1.jpg">
+    <None Include="data\install\test\products\dvd_drive\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\hdd\img\2.jpg">
+    <None Include="data\install\test\products\hdd\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\hdd\img\3.jpg">
+    <None Include="data\install\test\products\hdd\img\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\motherboard\img\1.jpg">
+    <None Include="data\install\test\products\hdd\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\motherboard\img\2.jpg">
+    <None Include="data\install\test\products\motherboard\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\motherboard\img\3.jpg">
+    <None Include="data\install\test\products\motherboard\img\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\motherboard\img\4.jpg">
+    <None Include="data\install\test\products\motherboard\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\ram_memory\img\1.jpg">
+    <None Include="data\install\test\products\motherboard\img\4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\ram_memory\img\2.jpg">
+    <None Include="data\install\test\products\ram_memory\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\ram_memory\img\3.jpg">
+    <None Include="data\install\test\products\ram_memory\img\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\sound_devices\img\1.jpg">
+    <None Include="data\install\test\products\ram_memory\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\sound_devices\img\2.jpg">
+    <None Include="data\install\test\products\sound_devices\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\sound_devices\img\3.jpg">
+    <None Include="data\install\test\products\sound_devices\img\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\video_cards\img\1.jpg">
+    <None Include="data\install\test\products\sound_devices\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\video_cards\img\2.jpg">
+    <None Include="data\install\test\products\video_cards\img\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\products\video_cards\img\3.jpg">
+    <None Include="data\install\test\products\video_cards\img\2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\install\test\products\video_cards\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\gtk_directory.png" />
     <None Include="Resources\open.png" />
     <None Include="Resources\open_win7_hot.png" />
-    <Content Include="TestData\users\img\1.jpg">
+    <None Include="data\install\scripts\users.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\users\img\2.jpg">
+    </None>
+    <None Include="data\install\scripts\products.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\users\img\3.jpg">
+    </None>
+    <None Include="data\install\scripts\vendors.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <None Include="data\install\scripts\categories.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\document_image_cancel_32.png" />
+    <None Include="Resources\log_in.png" />
+    <None Include="data\install\test\users\img\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\install\test\users\img\2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\install\test\users\img\3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

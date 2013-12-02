@@ -1,0 +1,4 @@
+﻿uid;password;surname;name;patronymic;image_url;is_admin
+1010;123456;Вармус;Денис;Сергеевич;1.jpg;false
+1020;123456;Волкова;Наталия;Андреевна;2.jpg;false
+1030;123456;Денисенкова;Ирина;Павловна;3.jpg;false

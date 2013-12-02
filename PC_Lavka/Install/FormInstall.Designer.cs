@@ -28,57 +28,58 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.buttonNext = new System.Windows.Forms.Button();
-      this.richTextBoxConnStr = new System.Windows.Forms.RichTextBox();
-      this.labelBase = new System.Windows.Forms.Label();
+      this.btNext = new System.Windows.Forms.Button();
+      this.rtbContent = new System.Windows.Forms.RichTextBox();
+      this.lbHeader = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
-      // buttonNext
+      // btNext
       // 
-      this.buttonNext.Location = new System.Drawing.Point(320, 227);
-      this.buttonNext.Name = "buttonNext";
-      this.buttonNext.Size = new System.Drawing.Size(75, 23);
-      this.buttonNext.TabIndex = 0;
-      this.buttonNext.Text = "Next >>";
-      this.buttonNext.UseVisualStyleBackColor = true;
-      this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
+      this.btNext.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.btNext.Location = new System.Drawing.Point(320, 215);
+      this.btNext.Name = "btNext";
+      this.btNext.Size = new System.Drawing.Size(75, 30);
+      this.btNext.TabIndex = 0;
+      this.btNext.Text = "Далее >>";
+      this.btNext.UseVisualStyleBackColor = true;
+      this.btNext.Click += new System.EventHandler(this.buttonNext_Click);
       // 
-      // richTextBoxConnStr
+      // rtbContent
       // 
-      this.richTextBoxConnStr.BackColor = System.Drawing.SystemColors.Control;
-      this.richTextBoxConnStr.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.richTextBoxConnStr.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.richTextBoxConnStr.ForeColor = System.Drawing.Color.Gray;
-      this.richTextBoxConnStr.Location = new System.Drawing.Point(12, 34);
-      this.richTextBoxConnStr.Name = "richTextBoxConnStr";
-      this.richTextBoxConnStr.Size = new System.Drawing.Size(383, 187);
-      this.richTextBoxConnStr.TabIndex = 2;
-      this.richTextBoxConnStr.Text = "";
-      this.richTextBoxConnStr.TextChanged += new System.EventHandler(this.richTextBoxConnStr_TextChanged);
+      this.rtbContent.BackColor = System.Drawing.SystemColors.Control;
+      this.rtbContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.rtbContent.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.rtbContent.ForeColor = System.Drawing.Color.Gray;
+      this.rtbContent.Location = new System.Drawing.Point(12, 34);
+      this.rtbContent.Name = "rtbContent";
+      this.rtbContent.Size = new System.Drawing.Size(383, 175);
+      this.rtbContent.TabIndex = 2;
+      this.rtbContent.Text = "";
+      this.rtbContent.TextChanged += new System.EventHandler(this.richTextBoxConnStr_TextChanged);
       // 
-      // labelBase
+      // lbHeader
       // 
-      this.labelBase.AutoSize = true;
-      this.labelBase.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.labelBase.ForeColor = System.Drawing.Color.Black;
-      this.labelBase.Location = new System.Drawing.Point(12, 9);
-      this.labelBase.Name = "labelBase";
-      this.labelBase.Size = new System.Drawing.Size(165, 22);
-      this.labelBase.TabIndex = 3;
-      this.labelBase.Text = "Connection String:";
+      this.lbHeader.AutoSize = true;
+      this.lbHeader.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.lbHeader.ForeColor = System.Drawing.Color.Black;
+      this.lbHeader.Location = new System.Drawing.Point(12, 9);
+      this.lbHeader.Name = "lbHeader";
+      this.lbHeader.Size = new System.Drawing.Size(196, 22);
+      this.lbHeader.TabIndex = 3;
+      this.lbHeader.Text = "Строка подключения:";
       // 
       // FormInstall
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(407, 257);
-      this.Controls.Add(this.labelBase);
-      this.Controls.Add(this.richTextBoxConnStr);
-      this.Controls.Add(this.buttonNext);
+      this.Controls.Add(this.lbHeader);
+      this.Controls.Add(this.rtbContent);
+      this.Controls.Add(this.btNext);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
       this.Name = "FormInstall";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Installation";
+      this.Text = "Установка";
       this.TopMost = true;
       this.ResumeLayout(false);
       this.PerformLayout();
@@ -87,8 +88,8 @@
 
     #endregion
 
-    private System.Windows.Forms.Button buttonNext;
-    private System.Windows.Forms.RichTextBox richTextBoxConnStr;
-    private System.Windows.Forms.Label labelBase;
+    private System.Windows.Forms.Button btNext;
+    private System.Windows.Forms.RichTextBox rtbContent;
+    private System.Windows.Forms.Label lbHeader;
   }
 }

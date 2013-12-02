@@ -28,7 +28,7 @@ namespace Views
       labelSurname.Text = user.Surname;
       labelName.Text = user.Name;
       labelPatronymic.Text = user.Patronymic;
-      pictureBoxPhoto.ImageLocation = user.ImageURL;
+      pictureBoxPhoto.Image = user.Photo;
     }
 
   }

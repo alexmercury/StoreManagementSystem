@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Меркулов Алексей
+// Mercury © 2013 
+// SqlManager Version: 1.0.0
+// 01.12.2013
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,68 +16,101 @@ using System.Windows.Forms;
 
 namespace SqlManaging
 {
-  public class SqlManager : IDisposable
+  /// <summary>
+  /// Статический класс для работы с базой данных.
+  /// </summary>
+  public static class SqlManager
   {
-    private DbConnection connection = null;
-    private DbCommand command = null;
-    private DbDataReader reader = null;
-    private String connectionString = null;
-
-    public SqlManager(string connectionString)
+    private static SqlConnection connection = null;
+    private static SqlCommand command = null;
+    /// <summary>
+    /// Готово ли соединение к работе с базой.
+    /// </summary>   
+    public static bool isReady = false;
+    ///	<summary>
+    ///	Метод для создания соединения с сервером.
+    /// <para>connectionString:</para>
+    /// <para>Строка соединения с сервером.</para>
+    /// <para>return:</para>
+    /// <para>true - соединение успешно,</para>
+    /// <para>false - соединение не удалось.</para>
+    /// </summary>
+    public static bool ConnectToServer(string connectionString)
     {
-      this.connectionString = connectionString;
-    }
-
-    public void ExecCommand(string sqlQuery)
-    {
-      try
-      {
-        connection = new SqlConnection(connectionString);
-        connection.Open();
-        command = new SqlCommand();
-        command.CommandText = sqlQuery;
-        command.Connection = connection;
-        command.ExecuteNonQuery();
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show(ex.Message);
-      }
-      finally
-      {
-        connection.Close();
-        connection.Dispose();
-      }
-    }
-
-    public bool TryToConnect()
-    {
-      bool result = false;
       try
       {
         connection = new SqlConnection(connectionString);
         connection.Open();
         if (connection.State == ConnectionState.Open)
         {
-          result = true;
-          connection.Close();
-          connection.Dispose();
+          isReady = true;
         }
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
       }
-
+      finally
+      {
+        connection.Close();
+      }
+      return isReady;
+    }
+    ///	<summary>
+    ///	Метод для выполнения SQL запроса, который не возвращает данных
+    /// <para>sqlQuery:</para>
+    /// <para>Текстовая строка запроса</para>
+    /// <para>return:</para>
+    /// <para>true - запрос выполнен,</para>
+    /// <para>false - запрос вернул ошибку.</para>
+    /// </summary>
+    public static bool ExecuteNonQuery(string sqlQuery)
+    {
+      bool result = false;
+      try
+      {
+        connection.Open();
+        command = new SqlCommand();
+        command.CommandText = sqlQuery;
+        command.Connection = connection;
+        command.ExecuteNonQuery();
+        result = true;
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+      finally
+      {
+        connection.Close();
+      }
       return result;
     }
-
-    public void Dispose()
+    ///	<summary>
+    ///	Метод для выполнения SELECT запроса в базу данных
+    /// <para>selectQuery:</para>
+    /// <para>Текстовая строка запроса</para>
+    /// <para>return:</para>
+    /// <para>Возвращает объект DataTable</para>
+    /// </summary>
+    public static DataTable Select(string selectQuery)
     {
-      connection.Dispose();
-      command.Dispose();
-      reader.Dispose();
-      connectionString = null;
+      DataTable table = new DataTable();
+      try
+      {
+        SqlDataAdapter da = new SqlDataAdapter(selectQuery, connection);
+        SqlCommandBuilder cmd = new SqlCommandBuilder(da);
+        DataSet set = new DataSet();
+        da.Fill(set);
+        da.Dispose();
+        table = set.Tables[0];
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
+      return table;
     }
   }
 }
