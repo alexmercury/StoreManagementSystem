@@ -116,6 +116,33 @@ namespace Models
       return product;
     }
 
+    public static List<Product> All()
+    {
+      List<Product> products = new List<Product>();
+      Product product = new Product();
+      try
+      {
+        SqlConnection conn = product.GetSqlConnection();
+        conn.Open();
+        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM [products];", conn);
+        SqlCommandBuilder cmd = new SqlCommandBuilder(da);
+        DataSet set = new DataSet();
+        da.Fill(set);
+
+        foreach (DataRow row in set.Tables[0].Rows)
+        {
+         products.Add(new Product(row));
+        }
+
+        conn.Close();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
+      return products;
+    }
 
     private byte[] ImageFileToBytes(string imageFilePath)
     {

@@ -100,6 +100,12 @@
     <Compile Include="UserLoginForm.Designer.cs">
       <DependentUpon>UserLoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ProductBox.Designer.cs">
+      <DependentUpon>ProductBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserLoginForm.resx">
       <DependentUpon>UserLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ProductBox.resx">
+      <DependentUpon>ProductBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserBox.resx">
       <DependentUpon>UserBox.cs</DependentUpon>

@@ -159,28 +159,6 @@ namespace Models
       }
     }
 
-    /*public static User FindByUID(int UID)
-    {
-      User user = new User();
-      SqlConnection conn = user.GetSqlConnection();
-      conn.Open();
-      SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM [user] WHERE [uid] = @p1;", conn);
-      SqlCommandBuilder cmd = new SqlCommandBuilder(da);
-      da.SelectCommand.Parameters.Add("@p1", SqlDbType.Int).Value = UID;
-      DataSet set = new DataSet();
-      da.Fill(set, "Picture");
-      DataTable table = set.Tables[0];
-
-      if (table.Rows.Count > 0)
-      {
-        user = new User(table.Rows[0]);
-      }
-      else
-        return null;
-
-      return user;
-    }*/
-
     public static User FindByUID(int UID)
     {
       User user = new User();
