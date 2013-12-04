@@ -141,7 +141,7 @@ namespace Models
       {
         SqlConnection conn = GetSqlConnection();
         conn.Open();
-        SqlCommand comm = new SqlCommand("INSERT INTO [users] ([uid],[password],[surname],[name],[patronymic],[photo],[is_admin]) Values(@p1,@p2,@p3,@p4,@p5,@p6,@p7);", conn);
+        SqlCommand comm = new SqlCommand("INSERT INTO [users] ([uid],[password],[surname],[name],[patronymic],[photo],[is_admin]) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7);", conn);
         comm.Parameters.Add("@p1", SqlDbType.Int).Value = this.UID;
         comm.Parameters.Add("@p2", SqlDbType.NVarChar, 255).Value = this.Password;
         comm.Parameters.Add("@p3", SqlDbType.NVarChar, 50).Value = this.Surname;
@@ -159,7 +159,7 @@ namespace Models
       }
     }
 
-    public static User FindByUID(int UID)
+    /*public static User FindByUID(int UID)
     {
       User user = new User();
       SqlConnection conn = user.GetSqlConnection();
@@ -179,7 +179,33 @@ namespace Models
         return null;
 
       return user;
+    }*/
+
+    public static User FindByUID(int UID)
+    {
+      User user = new User();
+      try
+      {
+        SqlConnection conn = user.GetSqlConnection();
+        conn.Open();
+        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM [users] WHERE [uid] = @p1;", conn);
+        SqlCommandBuilder cmd = new SqlCommandBuilder(da);
+        da.SelectCommand.Parameters.Add("@p1", SqlDbType.Int).Value = UID;
+        DataSet set = new DataSet();
+        da.Fill(set);
+  
+        user = new User(set.Tables[0].Rows[0]);
+        
+        conn.Close();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
+      return user;
     }
+
 
     public static User Create(
         int UID,
@@ -242,6 +268,40 @@ namespace Models
     {
       String cs = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
       return new SqlConnection(cs);
+    }
+
+    private DataTable ReaderToTable(SqlDataReader reader)
+    {
+      DataTable table = new DataTable();
+      try
+      {
+        int line = 0;
+
+        while (reader.Read())
+        {
+          if (line == 0)
+          {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+              table.Columns.Add(reader.GetName(i));
+            }
+            line++;
+          }
+
+          DataRow row = table.NewRow();
+          for (int i = 0; i < reader.FieldCount; i++)
+          {
+            row[i] = reader[i];
+          }
+          table.Rows.Add(row);
+        }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
+      return table;
     }
 
   }

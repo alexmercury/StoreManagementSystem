@@ -59,7 +59,7 @@ namespace Install
           WriteTestData();// Заполнение таблиц тестовыми данными
           break;
         case 3:// Четвертый шаг установки
-          WriteTestData();// Заполнение таблиц тестовыми данными
+          FinishInstall();// Завершение установки
           break;
       }
       Cursor = Cursors.Default;
@@ -145,31 +145,90 @@ namespace Install
     // Заполнение таблиц тестовыми данными
     private void WriteTestData()
     {
-      lbHeader.Text = "Заполнение данными:";
-      rtbContent.Text = "Создание записи администратора...\n";
-      DataTable tabe = new DataTable();
+      DataTable tabe = null;
+      CSVReader reader = null;
+
       string root_path = @"data\install\test\";
-
-      User.Create(1000, "admin", "admin", "admin", "admin", root_path + @"users\img\admin.png", true);
-
-      CSVReader reader = new CSVReader(root_path + @"users\users.csv");
-      tabe = reader.GetDataTable();
-      foreach (DataRow row in tabe.Rows)
+      try
       {
-        rtbContent.Text += "Создание пользователя UID = " + row["uid"].ToString() + " ...\n";
-        User.Create(
-            Convert.ToInt32(row["uid"].ToString()),
-            row["password"].ToString(),
-            row["surname"].ToString(),
-            row["name"].ToString(),
-            row["patronymic"].ToString(),
-            root_path + @"users\img\" + row["image_url"].ToString(),
-            false           
-        );
+        lbHeader.Text = "Заполнение данными:";
+        rtbContent.Text = "Создание записи администратора...\n";
+        User.Create(1000, "admin", "admin", "admin", "admin", root_path + @"users\img\admin.png", true);
+        // Создание пользователей
+        reader = new CSVReader(root_path + @"users\users.csv");
+        tabe = reader.GetDataTable();
+        foreach (DataRow row in tabe.Rows)
+        {
+          rtbContent.Text += "Создание пользователя UID = " + row["uid"].ToString() + " ...\n";
+          User.Create(
+              Convert.ToInt32(row["uid"].ToString()),
+              row["password"].ToString(),
+              row["surname"].ToString(),
+              row["name"].ToString(),
+              row["patronymic"].ToString(),
+              root_path + @"users\img\" + row["image_url"].ToString(),
+              false
+          );
+        }
+        // Создание производителей (vendor)
+        rtbContent.Text += "Создание производителей (vendor)...\n";
+        reader = new CSVReader(root_path + @"vendors\vendors.csv");
+        tabe = reader.GetDataTable();
+        foreach (DataRow row in tabe.Rows)
+        {
+          Vendor.Create(row["name"].ToString());
+        }
+        // Создание категорий и товаров
+        reader = new CSVReader(root_path + @"categories\categories.csv");
+        tabe = reader.GetDataTable();
+        foreach (DataRow row in tabe.Rows)
+        {
+          Category.Create(row["name"].ToString(), row["name"].ToString());
+        }
+
+        foreach (Category cat in Category.All())
+        {
+          string prodpath = root_path + @"products\" + cat.Name.ToLower().Replace(' ', '_');
+          reader = new CSVReader(prodpath + @"\products.csv");
+          tabe = reader.GetDataTable();
+          List<Vendor> vendors = Vendor.All();
+          foreach (DataRow row in tabe.Rows)
+          {
+            int venId = 0;
+
+            foreach (Vendor ven in vendors)
+            {
+              if (ven.Name == row["vendors"].ToString())
+                venId = ven.ID;
+            }
+
+            Product.Create(
+                row["name"].ToString(),
+                row["specification"].ToString(),
+                prodpath + @"\img\" + row["image_url"].ToString(),
+                Convert.ToInt32(row["price"].ToString()),
+                venId,
+                cat.ID
+            );
+          }
+
+        }
+
       }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
       rtbContent.Text += "Нажмите кнопку 'Далее >>', чтобы завершить установку...";
       // Изменяем шаг
       step++;
+    }
+
+    private void FinishInstall()
+    {
+      this.DialogResult = DialogResult.OK;
+      this.Close();
     }
 
   }

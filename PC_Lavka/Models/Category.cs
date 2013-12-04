@@ -9,26 +9,30 @@ using System.Windows.Forms;
 
 namespace Models
 {
-  public class Vendor
+  public class Category
   {
     public int ID;
     public string Name;
+    public string NameRU;
 
-    public Vendor()
+    public Category()
     {
       this.ID = 0;
       this.Name = "";
+      this.NameRU = "";
     }
 
-    public Vendor(DataRow row)
+    public Category(DataRow row)
     {
       this.ID = Convert.ToInt32(row["id"]);
       this.Name = row["name"].ToString();
+      this.NameRU = row["name_ru"].ToString();
     }
 
-    public Vendor(string Name)
+    public Category(string Name, string NameRU)
     {
       this.Name = Name;
+      this.NameRU = NameRU;
     }
 
     public void Save()
@@ -37,8 +41,9 @@ namespace Models
       {
         SqlConnection conn = GetSqlConnection();
         conn.Open();
-        SqlCommand comm = new SqlCommand("INSERT INTO [vendors] ([name]) VALUES (@p1);", conn);
+        SqlCommand comm = new SqlCommand("INSERT INTO [categories] ([name],[name_ru]) VALUES (@p1, @p2);", conn);
         comm.Parameters.Add("@p1", SqlDbType.NVarChar, 50).Value = this.Name;
+        comm.Parameters.Add("@p2", SqlDbType.NVarChar, 50).Value = this.NameRU;
 
         comm.ExecuteNonQuery();
         conn.Close();
@@ -49,25 +54,25 @@ namespace Models
       }
     }
 
-    public static Vendor Create(string Name)
+    public static Category Create(string Name, string NameRU)
     {
-      Vendor vendor = new Vendor(Name);
-      vendor.Save();
-      return vendor;
+      Category category = new Category(Name, NameRU);
+      category.Save();
+      return category;
     }
 
-    public static List<Vendor> All()
+    public static List<Category> All()
     {
-      List<Vendor> vendors = new List<Vendor>();
-      Vendor vendor = new Vendor();
+      List<Category> categories = new List<Category>();
+      Category category = new Category();
       try
       {
-        SqlConnection conn = vendor.GetSqlConnection();
+        SqlConnection conn = category.GetSqlConnection();
         conn.Open();
-        SqlCommand comm = new SqlCommand("SELECT * FROM [vendors];", conn);
-        foreach (DataRow row in vendor.ReaderToTable(comm.ExecuteReader()).Rows)
+        SqlCommand comm = new SqlCommand("SELECT * FROM [categories];", conn);
+        foreach (DataRow row in category.ReaderToTable(comm.ExecuteReader()).Rows)
         {
-          vendors.Add(new Vendor(row));
+          categories.Add(new Category(row));
         }
         conn.Close();
       }
@@ -76,7 +81,7 @@ namespace Models
         MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
       }
 
-      return vendors;
+      return categories;
     }
     /////////////////////////////////////////////////////// Работа с базой данных (БД)
     ///	<summary>
