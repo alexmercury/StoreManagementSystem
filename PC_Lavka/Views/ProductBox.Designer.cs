@@ -29,11 +29,11 @@
     private void InitializeComponent()
     {
       this.lbName = new System.Windows.Forms.Label();
-      this.pbPhoto = new System.Windows.Forms.PictureBox();
       this.rtbContent = new System.Windows.Forms.RichTextBox();
-      this.btnDelete = new System.Windows.Forms.Button();
-      this.button1 = new System.Windows.Forms.Button();
       this.lbPrice = new System.Windows.Forms.Label();
+      this.btAddShoppingCart = new System.Windows.Forms.Button();
+      this.btnDelete = new System.Windows.Forms.Button();
+      this.pbPhoto = new System.Windows.Forms.PictureBox();
       ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
       this.SuspendLayout();
       // 
@@ -48,19 +48,9 @@
       this.lbName.Text = "label1";
       this.lbName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
-      // pbPhoto
-      // 
-      this.pbPhoto.ErrorImage = global::PC_Lavka.Properties.Resources.no_image;
-      this.pbPhoto.Location = new System.Drawing.Point(3, 21);
-      this.pbPhoto.Name = "pbPhoto";
-      this.pbPhoto.Size = new System.Drawing.Size(169, 208);
-      this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.pbPhoto.TabIndex = 1;
-      this.pbPhoto.TabStop = false;
-      // 
       // rtbContent
       // 
-      this.rtbContent.BackColor = System.Drawing.SystemColors.ButtonShadow;
+      this.rtbContent.BackColor = System.Drawing.SystemColors.Control;
       this.rtbContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.rtbContent.Cursor = System.Windows.Forms.Cursors.Default;
       this.rtbContent.Location = new System.Drawing.Point(179, 22);
@@ -70,26 +60,6 @@
       this.rtbContent.Size = new System.Drawing.Size(195, 107);
       this.rtbContent.TabIndex = 2;
       this.rtbContent.Text = "";
-      // 
-      // btnDelete
-      // 
-      this.btnDelete.Location = new System.Drawing.Point(178, 185);
-      this.btnDelete.Name = "btnDelete";
-      this.btnDelete.Size = new System.Drawing.Size(46, 44);
-      this.btnDelete.TabIndex = 3;
-      this.btnDelete.Text = "del";
-      this.btnDelete.UseVisualStyleBackColor = true;
-      this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-      // 
-      // button1
-      // 
-      this.button1.Location = new System.Drawing.Point(230, 185);
-      this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(46, 44);
-      this.button1.TabIndex = 4;
-      this.button1.Text = "add";
-      this.button1.UseVisualStyleBackColor = true;
-      this.button1.Click += new System.EventHandler(this.button1_Click);
       // 
       // lbPrice
       // 
@@ -101,13 +71,43 @@
       this.lbPrice.Text = "0";
       this.lbPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
+      // btAddShoppingCart
+      // 
+      this.btAddShoppingCart.Image = global::PC_Lavka.Properties.Resources.cart_add;
+      this.btAddShoppingCart.Location = new System.Drawing.Point(230, 185);
+      this.btAddShoppingCart.Name = "btAddShoppingCart";
+      this.btAddShoppingCart.Size = new System.Drawing.Size(46, 44);
+      this.btAddShoppingCart.TabIndex = 4;
+      this.btAddShoppingCart.UseVisualStyleBackColor = true;
+      this.btAddShoppingCart.Click += new System.EventHandler(this.button1_Click);
+      // 
+      // btnDelete
+      // 
+      this.btnDelete.Image = global::PC_Lavka.Properties.Resources.cart_remove;
+      this.btnDelete.Location = new System.Drawing.Point(178, 185);
+      this.btnDelete.Name = "btnDelete";
+      this.btnDelete.Size = new System.Drawing.Size(46, 44);
+      this.btnDelete.TabIndex = 3;
+      this.btnDelete.UseVisualStyleBackColor = true;
+      this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+      // 
+      // pbPhoto
+      // 
+      this.pbPhoto.ErrorImage = global::PC_Lavka.Properties.Resources.no_image;
+      this.pbPhoto.Location = new System.Drawing.Point(3, 21);
+      this.pbPhoto.Name = "pbPhoto";
+      this.pbPhoto.Size = new System.Drawing.Size(169, 208);
+      this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+      this.pbPhoto.TabIndex = 1;
+      this.pbPhoto.TabStop = false;
+      // 
       // ProductBox
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.Controls.Add(this.lbPrice);
-      this.Controls.Add(this.button1);
+      this.Controls.Add(this.btAddShoppingCart);
       this.Controls.Add(this.btnDelete);
       this.Controls.Add(this.rtbContent);
       this.Controls.Add(this.pbPhoto);
@@ -126,7 +126,7 @@
     private System.Windows.Forms.PictureBox pbPhoto;
     private System.Windows.Forms.RichTextBox rtbContent;
     private System.Windows.Forms.Button btnDelete;
-    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.Button btAddShoppingCart;
     private System.Windows.Forms.Label lbPrice;
   }
 }

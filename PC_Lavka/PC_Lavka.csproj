@@ -212,7 +212,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\cart_add.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="data\install\test\users\img\admin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -327,6 +329,9 @@
     <None Include="data\install\test\users\img\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cart_remove.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

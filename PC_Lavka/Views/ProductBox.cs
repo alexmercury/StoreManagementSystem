@@ -14,7 +14,7 @@ namespace Views
 
   public partial class ProductBox : UserControl
   {
-    private Product CurrentProduct = null;
+    public Product CurrentProduct = null;
     private bool is_admin = false;
     public event ViewsEvent onDelete;
     public event ViewsEvent onAddShoppingCart;
@@ -31,7 +31,7 @@ namespace Views
       pbPhoto.Image = CurrentProduct.Photo;
       lbName.Text = CurrentProduct.Name;
       rtbContent.Text = CurrentProduct.Specification;
-      lbPrice.Text = CurrentProduct.Price.ToString();
+      lbPrice.Text = CurrentProduct.Price.ToString() + " грн";
     }
 
     private void Delete()
@@ -42,7 +42,7 @@ namespace Views
 
     private void AddShoppingCart()
     {
-      this.button1.Enabled = false;
+      this.btAddShoppingCart.Enabled = false;
       if (onAddShoppingCart != null)
         onAddShoppingCart((object)this);
     }

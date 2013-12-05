@@ -144,6 +144,64 @@ namespace Models
       return products;
     }
 
+    public static List<Product> FindByVendor(string vendor)
+    {
+      List<Product> products = new List<Product>();
+      Product product = new Product();
+      try
+      {
+        SqlConnection conn = product.GetSqlConnection();
+        conn.Open();
+        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM [products] WHERE [vendor_id] = (SELECT [id] FROM [vendors] WHERE [name] = @p1);", conn);
+        da.SelectCommand.Parameters.Add("@p1", SqlDbType.NVarChar, 50).Value = vendor;
+        SqlCommandBuilder cmd = new SqlCommandBuilder(da);
+        DataSet set = new DataSet();
+        da.Fill(set);
+
+        foreach (DataRow row in set.Tables[0].Rows)
+        {
+          products.Add(new Product(row));
+        }
+
+        conn.Close();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
+      return products;
+    }
+
+    public static List<Product> FindByCategory(string category)
+    {
+      List<Product> products = new List<Product>();
+      Product product = new Product();
+      try
+      {
+        SqlConnection conn = product.GetSqlConnection();
+        conn.Open();
+        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM [products] WHERE [category_id] = (SELECT [id] FROM [categories] WHERE [name] = @p1);", conn);
+        da.SelectCommand.Parameters.Add("@p1", SqlDbType.NVarChar, 50).Value = category;
+        SqlCommandBuilder cmd = new SqlCommandBuilder(da);
+        DataSet set = new DataSet();
+        da.Fill(set);
+
+        foreach (DataRow row in set.Tables[0].Rows)
+        {
+          products.Add(new Product(row));
+        }
+
+        conn.Close();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+
+      return products;
+    }
+
     private byte[] ImageFileToBytes(string imageFilePath)
     {
       FileStream fs = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);

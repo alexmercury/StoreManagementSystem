@@ -35,19 +35,23 @@
       this.flpBase = new System.Windows.Forms.FlowLayoutPanel();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.flpShoppingCart = new System.Windows.Forms.FlowLayoutPanel();
+      this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+      this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
       this.ctmnBase = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.allToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-      this.categoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.allToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+      this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+      this.byVendorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.byCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.userBoxCurrent = new Views.UserBox();
+      this.toolStripStatusLbPrice = new System.Windows.Forms.ToolStripStatusLabel();
       this.panelUser.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
+      this.statusStrip1.SuspendLayout();
       this.ctmnBase.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -74,16 +78,18 @@
       // flpBase
       // 
       this.flpBase.AutoScroll = true;
+      this.flpBase.BackColor = System.Drawing.SystemColors.Control;
       this.flpBase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.flpBase.Dock = System.Windows.Forms.DockStyle.Fill;
       this.flpBase.Location = new System.Drawing.Point(0, 0);
       this.flpBase.Name = "flpBase";
-      this.flpBase.Size = new System.Drawing.Size(766, 360);
+      this.flpBase.Size = new System.Drawing.Size(766, 305);
       this.flpBase.TabIndex = 2;
       this.flpBase.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flpBase_MouseDown);
       // 
       // splitContainer1
       // 
+      this.splitContainer1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
       this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.splitContainer1.Location = new System.Drawing.Point(240, 24);
       this.splitContainer1.Name = "splitContainer1";
@@ -96,35 +102,61 @@
       // splitContainer1.Panel2
       // 
       this.splitContainer1.Panel2.Controls.Add(this.flpShoppingCart);
+      this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
       this.splitContainer1.Size = new System.Drawing.Size(766, 483);
-      this.splitContainer1.SplitterDistance = 360;
+      this.splitContainer1.SplitterDistance = 305;
       this.splitContainer1.TabIndex = 3;
       // 
       // flpShoppingCart
       // 
       this.flpShoppingCart.AutoScroll = true;
+      this.flpShoppingCart.BackColor = System.Drawing.SystemColors.Control;
       this.flpShoppingCart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.flpShoppingCart.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.flpShoppingCart.Location = new System.Drawing.Point(0, 0);
+      this.flpShoppingCart.Location = new System.Drawing.Point(0, 30);
       this.flpShoppingCart.Name = "flpShoppingCart";
-      this.flpShoppingCart.Size = new System.Drawing.Size(766, 119);
+      this.flpShoppingCart.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+      this.flpShoppingCart.Size = new System.Drawing.Size(766, 144);
       this.flpShoppingCart.TabIndex = 0;
+      // 
+      // statusStrip1
+      // 
+      this.statusStrip1.AutoSize = false;
+      this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
+      this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLbPrice});
+      this.statusStrip1.Location = new System.Drawing.Point(0, 0);
+      this.statusStrip1.Name = "statusStrip1";
+      this.statusStrip1.Size = new System.Drawing.Size(766, 30);
+      this.statusStrip1.TabIndex = 1;
+      this.statusStrip1.Text = "statusStrip1";
+      // 
+      // toolStripStatusLabel1
+      // 
+      this.toolStripStatusLabel1.BackColor = System.Drawing.SystemColors.Control;
+      this.toolStripStatusLabel1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+      this.toolStripStatusLabel1.Size = new System.Drawing.Size(59, 25);
+      this.toolStripStatusLabel1.Text = "Price:";
       // 
       // ctmnBase
       // 
       this.ctmnBase.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.productsToolStripMenuItem,
-            this.vendorsToolStripMenuItem,
-            this.categoryToolStripMenuItem});
+            this.clearToolStripMenuItem});
       this.ctmnBase.Name = "contextMenuStrip1";
-      this.ctmnBase.Size = new System.Drawing.Size(123, 70);
+      this.ctmnBase.Size = new System.Drawing.Size(122, 48);
       // 
       // productsToolStripMenuItem
       // 
       this.productsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem});
+            this.allToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.byVendorToolStripMenuItem,
+            this.byCategoryToolStripMenuItem});
       this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-      this.productsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+      this.productsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
       this.productsToolStripMenuItem.Text = "Products";
       // 
       // allToolStripMenuItem
@@ -134,33 +166,29 @@
       this.allToolStripMenuItem.Text = "All";
       this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
       // 
-      // vendorsToolStripMenuItem
+      // clearToolStripMenuItem
       // 
-      this.vendorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem1});
-      this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
-      this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-      this.vendorsToolStripMenuItem.Text = "Vendors";
+      this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+      this.clearToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+      this.clearToolStripMenuItem.Text = "Clear";
+      this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
       // 
-      // allToolStripMenuItem1
+      // toolStripMenuItem2
       // 
-      this.allToolStripMenuItem1.Name = "allToolStripMenuItem1";
-      this.allToolStripMenuItem1.Size = new System.Drawing.Size(88, 22);
-      this.allToolStripMenuItem1.Text = "All";
+      this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+      this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
       // 
-      // categoryToolStripMenuItem
+      // byVendorToolStripMenuItem
       // 
-      this.categoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem2});
-      this.categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
-      this.categoryToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-      this.categoryToolStripMenuItem.Text = "Category";
+      this.byVendorToolStripMenuItem.Name = "byVendorToolStripMenuItem";
+      this.byVendorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.byVendorToolStripMenuItem.Text = "By vendor";
       // 
-      // allToolStripMenuItem2
+      // byCategoryToolStripMenuItem
       // 
-      this.allToolStripMenuItem2.Name = "allToolStripMenuItem2";
-      this.allToolStripMenuItem2.Size = new System.Drawing.Size(88, 22);
-      this.allToolStripMenuItem2.Text = "All";
+      this.byCategoryToolStripMenuItem.Name = "byCategoryToolStripMenuItem";
+      this.byCategoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.byCategoryToolStripMenuItem.Text = "By category";
       // 
       // userBoxCurrent
       // 
@@ -169,6 +197,14 @@
       this.userBoxCurrent.Name = "userBoxCurrent";
       this.userBoxCurrent.Size = new System.Drawing.Size(240, 370);
       this.userBoxCurrent.TabIndex = 0;
+      // 
+      // toolStripStatusLbPrice
+      // 
+      this.toolStripStatusLbPrice.BackColor = System.Drawing.SystemColors.Control;
+      this.toolStripStatusLbPrice.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.toolStripStatusLbPrice.Name = "toolStripStatusLbPrice";
+      this.toolStripStatusLbPrice.Size = new System.Drawing.Size(21, 25);
+      this.toolStripStatusLbPrice.Text = "0";
       // 
       // FormBase
       // 
@@ -188,6 +224,8 @@
       this.splitContainer1.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
+      this.statusStrip1.ResumeLayout(false);
+      this.statusStrip1.PerformLayout();
       this.ctmnBase.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
@@ -205,10 +243,13 @@
     private System.Windows.Forms.ContextMenuStrip ctmnBase;
     private System.Windows.Forms.ToolStripMenuItem productsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem vendorsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem1;
-    private System.Windows.Forms.ToolStripMenuItem categoryToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem2;
+    private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+    private System.Windows.Forms.StatusStrip statusStrip1;
+    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+    private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+    private System.Windows.Forms.ToolStripMenuItem byVendorToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem byCategoryToolStripMenuItem;
+    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLbPrice;
   }
 }
 

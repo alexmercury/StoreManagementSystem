@@ -26,6 +26,20 @@ namespace PC_Lavka
       CurrentUser = new User();
     }
 
+    private void StartLoad()
+    {
+      foreach (Vendor ven in Vendor.All())
+      {
+        byVendorToolStripMenuItem.DropDownItems.Add(ven.Name, null, byVendor_Click);
+      }
+
+      foreach (Category cat in Category.All())
+      {
+        byCategoryToolStripMenuItem.DropDownItems.Add(cat.Name, null, byCategory_Click);
+      }
+
+    }
+
     private void FormBase_Load(object sender, EventArgs e)
     {
       if (ConfigurationManager.AppSettings["Installed"] == "false")
@@ -48,12 +62,15 @@ namespace PC_Lavka
         if (login.ShowDialog() == DialogResult.OK)
         {
           userBoxCurrent.SetCurrentUser(CurrentUser);
+          StartLoad();
         }
         else
         {
           this.Close();
         }
       }
+
+
     }
 
     private void flpBase_MouseDown(object sender, MouseEventArgs e)
@@ -67,6 +84,32 @@ namespace PC_Lavka
     private void allToolStripMenuItem_Click(object sender, EventArgs e)
     {
       GetAllProducts();
+    }
+
+    private void byCategory_Click(object sender, EventArgs e)
+    {
+      flpBase.Controls.Clear();
+
+      foreach (Product prod in Product.FindByCategory((sender as ToolStripItem).Text))
+      {
+        ProductBox pb = new ProductBox(prod, CurrentUser.is_admin);
+        pb.onDelete += this.OnProductBoxDelete;
+        pb.onAddShoppingCart += pb_onAddShoppingCart;
+        flpBase.Controls.Add(pb);
+      }
+    }
+
+    private void byVendor_Click(object sender, EventArgs e)
+    {
+      flpBase.Controls.Clear();
+
+      foreach (Product prod in Product.FindByVendor((sender as ToolStripItem).Text))
+      {
+        ProductBox pb = new ProductBox(prod, CurrentUser.is_admin);
+        pb.onDelete += this.OnProductBoxDelete;
+        pb.onAddShoppingCart += pb_onAddShoppingCart;
+        flpBase.Controls.Add(pb);
+      }
     }
 
     private void GetAllProducts()
@@ -85,12 +128,27 @@ namespace PC_Lavka
     void pb_onAddShoppingCart(object sender)
     {
       flpShoppingCart.Controls.Add((sender as ProductBox));
+      PriceAdd((sender as ProductBox).CurrentProduct.Price);
     }
 
     private void OnProductBoxDelete(object sender)
     {
       flpBase.Controls.Remove((sender as ProductBox));
+      int old = flpShoppingCart.Controls.Count;
       flpShoppingCart.Controls.Remove((sender as ProductBox));
+      if (flpShoppingCart.Controls.Count != old)
+        PriceAdd(-(sender as ProductBox).CurrentProduct.Price);
+    }
+
+    private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      flpBase.Controls.Clear();
+    }
+
+    private void PriceAdd(int num)
+    {
+      int oldPrice = Convert.ToInt32(toolStripStatusLbPrice.Text);
+      toolStripStatusLbPrice.Text = (oldPrice + num).ToString();
     }
 
   }
