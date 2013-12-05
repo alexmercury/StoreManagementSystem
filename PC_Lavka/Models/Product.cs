@@ -131,7 +131,7 @@ namespace Models
 
         foreach (DataRow row in set.Tables[0].Rows)
         {
-         products.Add(new Product(row));
+          products.Add(new Product(row));
         }
 
         conn.Close();

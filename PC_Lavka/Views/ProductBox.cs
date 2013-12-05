@@ -24,6 +24,7 @@ namespace Views
       InitializeComponent();
       CurrentProduct = product;
       this.is_admin = is_admin;
+      this.btnDelete.Enabled = false;
     }
 
     private void ProductBox_Load(object sender, EventArgs e)
@@ -42,7 +43,7 @@ namespace Views
 
     private void AddShoppingCart()
     {
-      this.btAddShoppingCart.Enabled = false;
+      //this.btAddShoppingCart.Enabled = false;
       if (onAddShoppingCart != null)
         onAddShoppingCart((object)this);
     }
@@ -55,6 +56,13 @@ namespace Views
     private void button1_Click(object sender, EventArgs e)
     {
       AddShoppingCart();
+    }
+    public ProductBox CloneObj()
+    {
+      ProductBox pb = new ProductBox(CurrentProduct, is_admin);
+      pb.btAddShoppingCart.Enabled = false;
+      pb.btnDelete.Enabled = true;
+      return pb;
     }
   }
 }

@@ -127,7 +127,9 @@ namespace PC_Lavka
 
     void pb_onAddShoppingCart(object sender)
     {
-      flpShoppingCart.Controls.Add((sender as ProductBox));
+      ProductBox pb = (sender as ProductBox).CloneObj();
+      pb.onDelete += this.OnProductBoxDelete;
+      flpShoppingCart.Controls.Add(pb);
       PriceAdd((sender as ProductBox).CurrentProduct.Price);
     }
 
