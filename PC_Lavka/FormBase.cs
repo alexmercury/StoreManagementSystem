@@ -31,12 +31,16 @@ namespace PC_Lavka
       foreach (Vendor ven in Vendor.All())
       {
         byVendorToolStripMenuItem.DropDownItems.Add(ven.Name, null, byVendor_Click);
+        byVendorToolStripMenuItem1.DropDownItems.Add(ven.Name, null, byVendor_Click);
       }
 
       foreach (Category cat in Category.All())
       {
         byCategoryToolStripMenuItem.DropDownItems.Add(cat.Name, null, byCategory_Click);
+        byCategoryToolStripMenuItem1.DropDownItems.Add(cat.Name, null, byCategory_Click);
       }
+
+      adminToolStripMenuItem.Enabled = CurrentUser.is_admin;
 
     }
 
@@ -69,7 +73,6 @@ namespace PC_Lavka
           this.Close();
         }
       }
-
 
     }
 
@@ -151,6 +154,33 @@ namespace PC_Lavka
     {
       int oldPrice = Convert.ToInt32(toolStripStatusLbPrice.Text);
       toolStripStatusLbPrice.Text = (oldPrice + num).ToString();
+    }
+
+    private void clearToolStripMenuItem1_Click(object sender, EventArgs e)
+    {
+      flpBase.Controls.Clear();
+    }
+
+    private void allToolStripMenuItem1_Click(object sender, EventArgs e)
+    {
+      GetAllProducts();
+    }
+
+    private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      this.Close();
+    }
+
+    private void productToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      FormFor.ProductForm form = new FormFor.ProductForm();
+      if (form.ShowDialog() == DialogResult.OK)
+      {
+        ProductBox pb = new ProductBox(form.NewProduct, CurrentUser.is_admin);
+        pb.onDelete += this.OnProductBoxDelete;
+        pb.onAddShoppingCart += pb_onAddShoppingCart;
+        flpBase.Controls.Add(pb);
+      }
     }
 
   }

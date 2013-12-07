@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Models;
+using FormFor;
 
 namespace Views
 {
@@ -25,9 +26,16 @@ namespace Views
       CurrentProduct = product;
       this.is_admin = is_admin;
       this.btnDelete.Enabled = false;
+      btnUpdate.Enabled = is_admin;
+      btnRemove.Enabled = is_admin;
     }
 
     private void ProductBox_Load(object sender, EventArgs e)
+    {
+      ContainData();
+    }
+
+    private void ContainData()
     {
       pbPhoto.Image = CurrentProduct.Photo;
       lbName.Text = CurrentProduct.Name;
@@ -63,6 +71,23 @@ namespace Views
       pb.btAddShoppingCart.Enabled = false;
       pb.btnDelete.Enabled = true;
       return pb;
+    }
+
+    private void btnUpdate_Click(object sender, EventArgs e)
+    {
+      ProductForm form = new ProductForm(CurrentProduct);
+      if (form.ShowDialog() == DialogResult.OK)
+      {
+        this.CurrentProduct = form.NewProduct;
+        ContainData();
+        this.Refresh();
+      }
+    }
+
+    private void btnRemove_Click(object sender, EventArgs e)
+    {
+      this.CurrentProduct.Delete();
+      Delete();
     }
   }
 }

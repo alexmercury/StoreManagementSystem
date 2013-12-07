@@ -83,6 +83,16 @@ namespace PC_Lavka.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deletered {
+            get {
+                object obj = ResourceManager.GetObject("deletered", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gtk_directory {
             get {
                 object obj = ResourceManager.GetObject("gtk_directory", resourceCulture);
@@ -116,6 +126,16 @@ namespace PC_Lavka.Properties {
         internal static System.Drawing.Bitmap open_win7_hot {
             get {
                 object obj = ResourceManager.GetObject("open_win7_hot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap system_software_update {
+            get {
+                object obj = ResourceManager.GetObject("system_software_update", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

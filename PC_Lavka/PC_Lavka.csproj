@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormFor\ProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFor\ProductForm.Designer.cs">
+      <DependentUpon>ProductForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
@@ -114,6 +120,9 @@
     </Compile>
     <EmbeddedResource Include="FormBase.resx">
       <DependentUpon>FormBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFor\ProductForm.resx">
+      <DependentUpon>ProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Install\FormInstall.resx">
       <DependentUpon>FormInstall.cs</DependentUpon>
@@ -332,6 +341,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cart_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\system_software_update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deletered.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\system_software_update1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

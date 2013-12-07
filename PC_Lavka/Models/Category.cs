@@ -129,5 +129,11 @@ namespace Models
 
       return table;
     }
+
+    public override string ToString()
+    {
+      return Name;
+    }
+
   }
 }
