@@ -59,19 +59,16 @@ namespace PC_Lavka
         else
           this.Close();
       }
+      SqlManager.ConnectToServer(ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString);
+      UserLoginForm login = new UserLoginForm(this);
+      if (login.ShowDialog() == DialogResult.OK)
+      {
+        userBoxCurrent.SetCurrentUser(CurrentUser);
+        StartLoad();
+      }
       else
       {
-        SqlManager.ConnectToServer(ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString);
-        UserLoginForm login = new UserLoginForm(this);
-        if (login.ShowDialog() == DialogResult.OK)
-        {
-          userBoxCurrent.SetCurrentUser(CurrentUser);
-          StartLoad();
-        }
-        else
-        {
-          this.Close();
-        }
+        this.Close();
       }
 
     }

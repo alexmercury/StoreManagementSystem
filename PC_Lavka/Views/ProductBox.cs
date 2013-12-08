@@ -51,7 +51,6 @@ namespace Views
 
     private void AddShoppingCart()
     {
-      //this.btAddShoppingCart.Enabled = false;
       if (onAddShoppingCart != null)
         onAddShoppingCart((object)this);
     }
